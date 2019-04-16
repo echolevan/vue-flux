@@ -1,5 +1,5 @@
 <template>
-	<div v-if="display" class="flux-index">
+	<div class="flux-index">
 		<transition name="fade">
 			<div v-show="displayButton" class="toggle" @click="toggle"></div>
 		</transition>
@@ -15,25 +15,23 @@
 </template>
 
 <script>
-	import FluxThumb from '@/components/FluxThumb.vue';
+	import FluxThumb from './FluxThumb.vue';
 
 	export default {
 		name: 'FluxIndex',
 
 		components: {
-			FluxThumb,
+			FluxThumb
 		},
 
 		data: () => ({
 			visible: false,
 			delay: 500,
-			touchStartTime: 0,
+			touchStartTime: 0
 		}),
 
 		props: {
-			slider: {
-				type: Object,
-			},
+			slider: { type: Object }
 		},
 
 		computed: {
@@ -42,7 +40,7 @@
 					return this.slider;
 
 				if (this.$parent.$options.name === 'VueFlux')
-					return this.$parent;
+					return this.$parent.loaded? this.$parent : undefined;
 
 				console.warn('slider not referenced, check https://github.com/deulos/vue-flux/wiki/FluxIndex for help');
 
@@ -53,33 +51,29 @@
 				if (!this.vf)
 					return [];
 
-				return this.vf.Images.props;
-			},
-
-			display: function() {
-				if (!this.vf)
-					return false;
-
-				if (this.vf.loaded === false)
-					return false;
-
-				return true;
+				return this.vf.properties;
 			},
 
 			displayButton: function() {
+				if (!this.vf)
+					return false;
+
 				if (!this.vf.index)
 					return false;
 
 				if (this.vf.mouseOver === false)
 					return false;
 
-				if (this.vf.Transitions.current !== undefined)
+				if (this.vf.transition.current !== undefined)
 					return false;
 
 				return true;
 			},
 
 			indexClass: function() {
+				if (!this.vf)
+					return '';
+
 				let indexClass = '';
 
 				if (this.visible && this.vf.index)
@@ -89,7 +83,7 @@
 					indexClass += ' mouse-over';
 
 				return indexClass;
-			},
+			}
 		},
 
 		methods: {
@@ -167,9 +161,9 @@
 			},
 
 			current(index) {
-				return this.vf.Images.current.index === index? 'current' : '';
-			},
-		},
+				return this.vf.currentImage().index === index? 'current' : '';
+			}
+		}
 	};
 </script>
 

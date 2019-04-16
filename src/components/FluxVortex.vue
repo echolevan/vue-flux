@@ -1,12 +1,10 @@
 <template>
-	<div :style="style" ref="vortex">
+	<div :style="style">
 		<flux-image
 			v-for="i in numCircles"
 			:key="i"
 			:slider="slider"
-			:display-size="displaySize"
-			:image-src="imageSrc"
-			:image-size="imageSize"
+			:index="index"
 			:css="getTileCss(i)"
 			ref="tiles">
 		</flux-image>
@@ -14,97 +12,49 @@
 </template>
 
 <script>
-	import DisplayController from '@/controllers/Display.js';
-	import FluxImage from '@/components/FluxImage.vue';
+	import FluxImage from './FluxImage.vue';
 
 	export default {
 		name: 'FluxVortex',
 
 		components: {
-			FluxImage,
+			FluxImage
 		},
 
 		data: () => ({
-			display: undefined,
 			diag: undefined,
 			radius: undefined,
 			tile: {
 				top: undefined,
-				left: undefined,
+				left: undefined
 			},
 			style: {
 				position: 'absolute',
 				width: '100%',
 				height: '100%',
-				zIndex: '12',
-			},
+				zIndex: '12'
+			}
 		}),
 
 		props: {
-			numCircles: {
-				type: Number,
-				default: 1,
-			},
-
-			slider: {
-				type: Object,
-				required: false,
-			},
-
-			displaySize: {
-				type: Object,
-				required: false,
-			},
-
-			imageSrc: {
-				type: String,
-				required: false,
-			},
-
-			imageSize: {
-				type: Object,
-				required: false,
-			},
-
-			color: {
-				type: String,
-				required: false,
-			},
-
-			css: {
-				type: Object,
-				default: () => ({
-					top: 0,
-					left: 0,
-				}),
-			},
-
-			tileCss: {
-				type: Object,
-				required: false,
-			},
+			slider: { type: Object, required: true },
+			numCircles: { type: Number, default: 0 },
+			index: { type: Number, required: true }
 		},
 
 		computed: {
+			size: function() {
+				return this.slider.size;
+			},
+
 			tiles: function() {
 				return this.$refs.tiles;
-			},
+			}
 		},
 
 		created() {
-			this.display = new DisplayController(this);
-
-			if (this.slider)
-				this.display.setSize(this.slider.size);
-
-			else if (this.displaySize)
-				this.display.setSize(this.displaySize);
-
-			else
-				this.display.setSizeFrom(this.$refs.vortex);
-
-			let width = this.display.size.width;
-			let height = this.display.size.height;
+			let width = this.size.width;
+			let height = this.size.height;
 
 			this.diag = Math.ceil(Math.sqrt(width * width + height * height));
 			this.radius = Math.ceil(this.diag / 2 / this.numCircles);
@@ -139,29 +89,25 @@
 				let height = width;
 				let zIndex = 13 + i;
 
-				return {
-					...this.tileCss,
+				return Object.assign({}, this.tileCss, {
 					top: this.getTileTop(i) +'px',
 					left: this.getTileLeft(i) +'px',
 					width: width +'px',
 					height: height +'px',
 					borderRadius: Math.ceil(width / 2) +'px',
-					zIndex: zIndex,
-				};
+					zIndex: zIndex
+				});
 			},
 
 			setCss(css) {
-				this.style = {
-					...this.style,
-					...css,
-				};
+				this.style = Object.assign({}, this.style, css);
 			},
 
 			transform(func) {
 				this.$nextTick(() => {
 					this.tiles.forEach((tile, i) => func(tile, i));
 				});
-			},
-		},
+			}
+		}
 	};
 </script>

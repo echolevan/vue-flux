@@ -10,12 +10,8 @@
 
 <script>
 	export default {
-		name: 'FluxControls',
-
 		props: {
-			slider: {
-				type: Object,
-			},
+			slider: { type: Object }
 		},
 
 		computed: {
@@ -24,7 +20,7 @@
 					return this.slider;
 
 				if (this.$parent.$options.name === 'VueFlux')
-					return this.$parent;
+					return this.$parent.loaded? this.$parent : undefined;
 
 				console.warn('slider not referenced, check https://github.com/deulos/vue-flux/wiki/FluxControls for help');
 
@@ -35,22 +31,19 @@
 				if (!this.vf)
 					return false;
 
-				if (this.vf.loaded === false)
-					return false;
-
 				if (this.vf.mouseOver === false)
 					return false;
 
-				if (this.vf.Transitions.current !== undefined)
+				if (this.vf.transition.current !== undefined)
 					return false;
 
 				return true;
 			},
 
 			autoplayClass: function() {
-				return this.vf && this.vf.config.autoplay? 'pause' : 'play';
-			},
-		},
+				return this.vf.config.autoplay? 'pause' : 'play';
+			}
+		}
 	};
 </script>
 

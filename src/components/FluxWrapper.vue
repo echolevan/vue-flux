@@ -6,8 +6,6 @@
 
 <script>
 	export default {
-		name: 'FluxWrapper',
-
 		data: () => ({
 			style: {
 				position: 'absolute',
@@ -15,24 +13,22 @@
 				left: 0,
 				width: '100%',
 				height: '100%',
-				zIndex: 12,
-			},
+				zIndex: 12
+			}
 		}),
 
 		methods: {
 			setCss(css) {
-				this.style = {
-					...this.style,
-					...css,
-				};
+				this.style = Object.assign({}, this.style, css);
 			},
 
 			transform(css) {
+				this.$refs.wrapper.clientHeight;
+
 				this.$nextTick(() => {
-					this.$refs.wrapper.clientHeight;
 					this.setCss(css);
 				});
-			},
-		},
+			}
+		}
 	};
 </script>

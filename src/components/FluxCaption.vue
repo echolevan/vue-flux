@@ -6,12 +6,8 @@
 
 <script>
 	export default {
-		name: 'FluxCaption',
-
 		props: {
-			slider: {
-				type: Object,
-			},
+			slider: { type: Object }
 		},
 
 		computed: {
@@ -20,7 +16,7 @@
 					return this.slider;
 
 				if (this.$parent.$options.name === 'VueFlux')
-					return this.$parent;
+					return this.$parent.loaded? this.$parent : undefined;
 
 				console.warn('slider not referenced, check https://github.com/deulos/vue-flux/wiki/FluxCaption for help');
 
@@ -31,13 +27,10 @@
 				if (!this.vf)
 					return '';
 
-				if (this.vf.loaded === false)
+				if (this.vf.transition.current !== undefined)
 					return '';
 
-				if (this.vf.Transitions.current !== undefined)
-					return '';
-
-				let currentImage = this.vf.Images.current;
+				let currentImage = this.vf.currentImage();
 
 				if (currentImage === undefined)
 					return '';
@@ -49,9 +42,9 @@
 			},
 
 			captions: function() {
-				return this.vf? this.vf.captions : {};
-			},
-		},
+				return this.vf.captions;
+			}
+		}
 	};
 </script>
 

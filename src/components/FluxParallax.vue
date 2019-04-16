@@ -7,67 +7,60 @@
 
 <script>
 	export default {
-		name: 'FluxParallax',
-
 		data: () => ({
 			loaded: false,
-
 			view: {
-				height: undefined,
+				height: undefined
 			},
-
 			parallax: {
 				top: undefined,
 				width: undefined,
-				height: undefined,
+				height: undefined
 			},
-
 			background: {
 				top: undefined,
 				left: undefined,
 				width: undefined,
-				height: undefined,
+				height: undefined
 			},
-
-			image: {
+			properties: {
 				src: undefined,
 				width: undefined,
-				height: undefined,
+				height: undefined
 			},
-
-			style: {},
+			style: {}
 		}),
 
 		props: {
 			src: {
 				type: String,
-				required: true,
+				required: true
 			},
 
 			holder: {
-				default: () => window,
+				default: () => window
 			},
 
 			type: {
 				type: String,
-				default: () => 'relative',
+				default: () => 'relative'
 			},
 
 			height: {
 				type: String,
-				default: () => 'auto',
+				default: () => 'auto'
 			},
 
 			offset: {
 				type: [Number, String],
-				default: () => '60%',
-			},
+				default: () => '60%'
+			}
 		},
 
 		computed: {
 			parallaxHeight: function() {
 				if (/^[0-9]+px$/.test(this.height) === true)
-					return parseFloat(this.height);
+					return parseInt(this.height);
 
 				return this.$refs.parallax.clientHeight;
 			},
@@ -78,10 +71,10 @@
 				};
 
 				if (/^[0-9]+px$/.test(this.offset) === true)
-					height.px = parseFloat(this.offset);
+					height.px = parseInt(this.offset);
 
 				if (/^[0-9]+%$/.test(this.offset) === true)
-					height.px = Math.ceil(this.parallaxHeight * parseFloat(this.offset) / 100);
+					height.px = Math.ceil(this.parallaxHeight * parseInt(this.offset) / 100);
 
 				height.pct = height.px * 100 / this.background.height;
 
@@ -106,19 +99,14 @@
 				height.pct = height.px * 100 / this.background.height;
 
 				return height;
-			},
+			}
 		},
 
 		mounted() {
-			window.addEventListener('resize', this.resize, {
-				passive: true,
-			});
+			window.addEventListener('resize', this.resize);
 
-			if (this.type !== 'fixed') {
-				this.holder.addEventListener('scroll', this.handleScroll, {
-					passive: true,
-				});
-			}
+			if (this.type !== 'fixed')
+				this.holder.addEventListener('scroll', this.handleScroll);
 		},
 
 		beforeDestroy() {
@@ -133,10 +121,10 @@
 				let img = this.$refs.image;
 
 				if (img.naturalWidth || img.width) {
-					Object.assign(this.image, {
+					Object.assign(this.properties, {
 						src: img.src,
 						width: img.naturalWidth || img.width,
-						height: img.naturalHeight || img.height,
+						height: img.naturalHeight || img.height
 					});
 				}
 
@@ -151,37 +139,37 @@
 
 				Object.assign(this.parallax, {
 					width: 'auto',
-					height: this.parallaxHeight,
+					height: this.parallaxHeight
 				});
 
 				this.setCss({
 					width: this.parallax.width,
-					height: this.parallax.height +'px',
+					height: this.parallax.height +'px'
 				});
 
 				this.$nextTick(() => {
 					Object.assign(this.parallax, {
 						top: parallax.offsetTop,
-						width: parallax.clientWidth,
+						width: parallax.clientWidth
 					});
 
 					let css = {
 						width: this.parallax.width +'px',
-						backgroundImage: 'url("'+ this.image.src +'")',
-						backgroundRepeat: 'no-repeat',
+						backgroundImage: 'url("'+ this.properties.src +'")',
+						backgroundRepeat: 'no-repeat'
 					};
 
 					if (this.type === 'fixed') {
 						Object.assign(css, {
 							backgroundPosition: 'center',
 							backgroundAttachment: 'fixed',
-							backgroundSize: 'cover',
+							backgroundSize: 'cover'
 						});
 
 					} else {
 						let image = {
-							width: this.image.width,
-							height: this.image.height,
+							width: this.properties.width,
+							height: this.properties.height
 						};
 
 						this.background.height = this.backgroundHeight.px;
@@ -195,7 +183,7 @@
 
 						Object.assign(css, {
 							backgroundSize: this.background.width +'px '+ this.background.height +'px',
-							backgroundPosition: 'center '+ this.background.top +'px',
+							backgroundPosition: 'center '+ this.background.top +'px'
 						});
 					}
 
@@ -206,17 +194,14 @@
 			},
 
 			init() {
-				if (!this.image.src)
+				if (!this.properties.src)
 					return;
 
 				this.resize();
 			},
 
 			setCss(css) {
-				this.style = {
-					...this.style,
-					...css,
-				};
+				this.style = Object.assign({}, this.style, css);
 			},
 
 			moveBackgroundByPct(pct) {
@@ -274,8 +259,8 @@
 				pct = positionY * 100 / (this.view.height + this.parallax.height);
 
 				this.moveBackgroundByPct(pct);
-			},
-		},
+			}
+		}
 	};
 </script>
 
