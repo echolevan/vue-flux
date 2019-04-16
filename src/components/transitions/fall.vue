@@ -15,7 +15,7 @@
 		data: () => ({
 			currentImage: undefined,
 			nextImage: undefined,
-			totalDuration: 1600,
+			totalDuration: 1000,
 			easing: 'ease-in',
 			imageCss: {
 				top: 0,

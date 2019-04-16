@@ -1,16 +1,16 @@
 <template>
 	<div id="app">
 		<div class="container mx-auto">
-			<div class="sm:block md:block lg:flex xl:flex">
-				<div class="lg:w-3/5 px-2 mb-4">
-					<vue-hsl-slide :options="fluxOptions" :images="fluxImages" :transitions="fluxTransitions" :captions="fluxCaptions" ref="slider">
+			<div class="">
+				<div class="">
+					<vue-hsl-slide style="width: 768px;height: 432px" :options="fluxOptions" :images="fluxImages" :transitions="fluxTransitions" :captions="fluxCaptions" ref="slider">
 <!--						<flux-caption slot="caption"></flux-caption>-->
 <!--						<flux-controls slot="controls"></flux-controls>-->
 <!--						<flux-index slot="index"></flux-index>-->
 <!--						<flux-pagination slot="pagination"></flux-pagination>-->
 					</vue-hsl-slide>
 				</div>
-				<div class="lg:w-2/5 px-2 mb-4 transitions">
+				<div class="transitions">
 					<h4 class="mb-2">2D Transitions</h4>
 
 					<ul class="list-reset flex mb-2">
@@ -18,9 +18,9 @@
 							<a :class="transitionClass('transitionFade')" @click="showNext('transitionFade')">Fade</a>
 						</li>
 
-						<li class="flex-1">
-							<a :class="transitionClass('transitionKenburn')" @click="showNext('transitionKenburn')">Kenburn</a>
-						</li>
+<!--						<li class="flex-1">-->
+<!--							<a :class="transitionClass('transitionKenburn')" @click="showNext('transitionKenburn')">Kenburn</a>-->
+<!--						</li>-->
 					</ul>
 
 					<ul class="list-reset flex mb-2">
@@ -130,11 +130,11 @@
 
 		components: {
 			VueHslSlide,
-			FluxCaption,
-			FluxControls,
-			FluxIndex,
-			FluxPagination,
-			FluxParallax
+			// FluxCaption,
+			// FluxControls,
+			// FluxIndex,
+			// FluxPagination,
+			// FluxParallax
 		},
 
 		data: () => ({
@@ -146,12 +146,14 @@
 				autoplay: true,
 				bindKeys: true,
 				fullscreen: true,
-				delay: 1000
+				delay: 1000,
+				img_width: 768,
+				img_height: 432,
 			},
 			fluxImages: [
-				'slides/1.jpg',
-				'slides/2.jpg',
-				'slides/3.jpg'
+				'https://newmedia.hesiling.com/img/G2KXwnrfEv6YC9FWTEVFFhnPtRoLPVI8i8IZLyYF.png',
+				'https://newmedia.hesiling.com/img/uQG9SpG2ePc3boe96mbt74wfeYvEH4E5ZfNmayP7.jpeg',
+				'https://newmedia.hesiling.com/img/bR15k0MK1kt1p0j9fMBUXTGXtnrqI15LaEt8L81R.jpeg'
 			],
 			fluxTransitions: Transitions,
 			fluxCaptions: [ 'First caption', 'Second caption', undefined, 'Fourth caption' ]
@@ -191,6 +193,9 @@
 </script>
 
 <style lang="scss" scoped>
+	#app {
+		margin-top: 50px;
+	}
 	.vue-flux {
 		box-shadow: 0 0 12px 2px rgba(34,36,38,.85);
 	}
@@ -200,7 +205,6 @@
 	}
 
 	.flux-parallax {
-		display: flex;
 		position: relative;
 		font-size: 3rem;
 		color: white;

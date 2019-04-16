@@ -18,7 +18,7 @@
 			index: {},
 			numRows: 1,
 			numCols: 0,
-			tileDuration: 600,
+			tileDuration: 1000,
 			totalDuration: 0,
 			easing: 'ease-in',
 			tileDelay: 80,

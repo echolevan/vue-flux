@@ -15,7 +15,7 @@
 		data: () => ({
 			currentImage: undefined,
 			nextImage: undefined,
-			totalDuration: 6000,
+			totalDuration: 1000,
 			easing: 'cubic-bezier(0.600, 0.040, 0.780, 0.335)',
 			index: undefined
 		}),

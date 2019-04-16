@@ -19,7 +19,7 @@
 		data: () => ({
 			currentImage: undefined,
 			nextImage: undefined,
-			totalDuration: 1400,
+			totalDuration: 1000,
 			easing: 'ease-in-out',
 			wrapperCss: {
 				overflow: 'hidden'

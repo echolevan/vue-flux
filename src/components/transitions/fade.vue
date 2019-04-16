@@ -7,7 +7,7 @@
 		data: () => ({
 			currentImage: undefined,
 			nextImage: undefined,
-			totalDuration: 1200,
+			totalDuration: 1000,
 			easing: 'ease-in'
 		}),
 

@@ -16,7 +16,7 @@
 			currentImage: undefined,
 			nextImage: undefined,
 			index: {},
-			totalDuration: 1400,
+			totalDuration: 1000,
 			perspective: '1600px',
 			easing: 'ease-out'
 		}),

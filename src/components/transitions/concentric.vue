@@ -17,7 +17,7 @@
 			nextImage: undefined,
 			index: undefined,
 			numCircles: undefined,
-			tileDuration: 800,
+			tileDuration: 1000,
 			totalDuration: 0,
 			easing: 'linear',
 			tileDelay: 150,

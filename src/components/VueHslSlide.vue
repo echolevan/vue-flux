@@ -250,12 +250,11 @@
 				this.imagesLoaded++;
 
 				let img = this.$refs.images[i];
-
 				if (img.naturalWidth || img.width) {
 					this.properties[i] = {
 						src: img.src,
-						width: img.naturalWidth || img.width,
-						height: img.naturalHeight || img.height
+						width: this.options.img_width,
+						height: this.options.img_height
 					};
 
 				} else {
