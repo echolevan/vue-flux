@@ -49,6 +49,8 @@
 		},
 
 		mounted() {
+			this.totalDuration = this.slider.config.duration || 1000;
+
 			this.wrapper.setCss(this.wrapperCss);
 
 			// if (this.direction === 'left') {

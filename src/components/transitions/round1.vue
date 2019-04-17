@@ -36,6 +36,8 @@
 		},
 
 		created() {
+			this.tileDuration = this.slider.config.duration || 1000;
+
 			this.currentImage = this.slider.currentImage();
 			this.nextImage = this.slider.nextImage();
 

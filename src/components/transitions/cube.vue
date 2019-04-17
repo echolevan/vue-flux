@@ -45,6 +45,8 @@
 		},
 
 		mounted() {
+			this.totalDuration = this.slider.config.duration || 1000;
+
 			this.slider.mask.style.perspective = this.perspective;
 
 			this.currentImage.hide();

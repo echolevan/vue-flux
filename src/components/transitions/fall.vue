@@ -43,6 +43,8 @@
 		},
 
 		mounted() {
+			this.totalDuration = this.slider.config.duration || 1000;
+
 			this.currentImage.hide();
 			this.slider.mask.style.perspective = '1600px';
 

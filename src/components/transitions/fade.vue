@@ -23,7 +23,9 @@
 		},
 
 		mounted() {
-			this.currentImage.setCss({
+          this.totalDuration = this.slider.config.duration || 1000;
+
+          this.currentImage.setCss({
 				transition: 'opacity '+ this.totalDuration +'ms '+ this.easing,
 				opacity: 0
 			});

@@ -77,6 +77,8 @@
 		},
 
 		mounted() {
+			this.totalDuration = this.slider.config.duration || 1000;
+
 			this.setCubeCss();
 			this.setCubeBackCss();
 			this.setImageCss();

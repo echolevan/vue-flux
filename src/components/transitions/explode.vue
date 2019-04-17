@@ -53,6 +53,8 @@
 		},
 
 		mounted() {
+			this.tileDuration = this.slider.config.duration || 1000;
+
 			this.currentImage.hide();
 
 			this.grid.transform((tile, i) => {

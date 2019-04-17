@@ -63,6 +63,8 @@
 		},
 
 		mounted() {
+			this.tileDuration = this.slider.config.duration || 1000;
+
 			let opacity, transform;
 
 			if (this.direction === 'right') {

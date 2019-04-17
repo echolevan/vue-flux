@@ -147,6 +147,7 @@
 				bindKeys: true,
 				fullscreen: true,
 				delay: 1000,
+				duration: 2000,
 				img_width: 768,
 				img_height: 432,
 			},
