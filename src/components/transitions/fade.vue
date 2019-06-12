@@ -16,15 +16,15 @@
 		},
 
 		created() {
-			this.currentImage = this.slider.currentImage();
+          this.totalDuration = this.slider.config.duration || 1000;
+
+          this.currentImage = this.slider.currentImage();
 			this.nextImage = this.slider.nextImage();
 
 			this.slider.setTransitionOptions(this);
 		},
 
 		mounted() {
-          this.totalDuration = this.slider.config.duration || 1000;
-
           this.currentImage.setCss({
 				transition: 'opacity '+ this.totalDuration +'ms '+ this.easing,
 				opacity: 0

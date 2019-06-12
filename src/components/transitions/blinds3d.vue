@@ -35,6 +35,9 @@
 		},
 
 		created() {
+			this.tileDuration = this.slider.config.duration || 1000;
+			this.tileDelay = Math.floor(this.tileDuration * 150 / 800);
+
 			this.currentImage = this.slider.currentImage();
 			this.nextImage = this.slider.nextImage();
 
@@ -53,8 +56,6 @@
 		},
 
 		mounted() {
-			this.tileDuration = this.slider.config.duration || 1000;
-
 			this.currentImage.hide();
 			this.nextImage.hide();
 

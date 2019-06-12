@@ -25,6 +25,8 @@
 		},
 
 		created() {
+			this.totalDuration = this.slider.config.duration || 1000;
+
 			this.currentImage = this.slider.currentImage();
 			this.nextImage = this.slider.nextImage();
 
@@ -37,8 +39,6 @@
 		},
 
 		mounted() {
-			this.totalDuration = this.slider.config.duration || 1000;
-
 			this.slider.mask.style.overflow = 'hidden';
 
 			let transform = this.getTransform();
